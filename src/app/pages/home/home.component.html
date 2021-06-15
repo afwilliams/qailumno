@@ -1,0 +1,16 @@
+<table class="table table-striped table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col">title</th>
+    <th scope="col">body</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let news of this.news$| async">
+    <td><a [routerLink]="['/news',news.id]">{{news.id}}</a></td>
+    <td> {{news.title}}</td>
+    <td> {{news.body}}</td>
+  </tr>
+  </tbody>
+</table>

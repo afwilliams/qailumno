@@ -1,0 +1,43 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="name" class="form-label">Nombre</label>
+    <input id="name" type="text" name="name" formControlName="name" class="form-control"
+           [class.is-invalid]="this.validationName()">
+  </div>
+  <div class="mb-3">
+    <label for="family_name" class="form-label">Apellido</label>
+    <input id="family_name" type="text" class="form-control" name="family_name" formControlName="family_name"
+           [class.is-invalid]="validationFamilyName()">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input id="email" type="email" name="email" formControlName="email" class="form-control"
+           [class.is-invalid]="validateEmail()">
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="form-label">Phone</label>
+    <input id="phone" class="form-control" name="phone" formControlName="phone" [class.is-invalid]="validatePhone()">
+    <div class="alert alert-danger mt-3" *ngIf="validatePhone()">
+      <ul>
+        <li>Solo números</li>
+        <li>Máximo 10 caracteres</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="select_programs" class="form-label">Programs</label>
+    <select class="form-select" id="select_programs" name="program" formControlName="program"
+            [class.is-invalid]="validateProgram()">
+      <option *ngFor="let program of programs$| async" [value]="program.id">{{program.name}}</option>
+    </select>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="isError">
+    {{this.messageError}}
+  </div>
+  <div class="alert alert-primary" role="alert" *ngIf="isSuccess">
+    ¡Sus datos fueron almacenados en nuestro sistema correctamente!
+  </div>
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn btn-warning">¡Registrarse!</button>
+  </div>
+</form>
